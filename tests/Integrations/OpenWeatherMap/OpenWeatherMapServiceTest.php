@@ -9,6 +9,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Http;
 use Str;
 use Tests\TestCase;
+use Illuminate\Http\Client\Request;
 
 class OpenWeatherMapServiceTest extends TestCase
 {
@@ -39,7 +40,10 @@ class OpenWeatherMapServiceTest extends TestCase
             '*'          => Http::response([], 404)
         ]);
 
-        $weatherResponse = $service->getWeather($request);
-        $this->assertInstanceOf(WeatherResponseData::class, $weatherResponse);
+        $service->getWeather($request);
+
+        Http::assertSent(static function(Request $request) use ($expectedUrl) {
+            return $request->url() === $expectedUrl;
+        });
     }
 }
