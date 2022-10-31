@@ -3,6 +3,7 @@
 namespace App\Domain\Weather\Jobs;
 
 use App\Domain\Weather\Models\WeatherRequest;
+use App\Integrations\Contracts\WeatherService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -20,7 +21,6 @@ class ProcessWeatherRequest implements ShouldQueue
      */
     public function __construct(public WeatherRequest $weatherRequest)
     {
-        //
     }
 
     /**
@@ -28,8 +28,9 @@ class ProcessWeatherRequest implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(WeatherService $service): void
     {
-        // TODO: implement
+        $service->getWeather($this->weatherRequest->toWeatherRequestData());
+        // TODO: handle response
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Integrations\DataTransferObjects\WeatherRequestData;
+use App\Domain\Weather\DataTransferObjects\CreateWeatherRequestData;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateWeatherRequestRequest extends FormRequest
@@ -14,7 +14,8 @@ class CreateWeatherRequestRequest extends FormRequest
         ];
     }
 
-    public function toData(): WeatherRequestData {
-        return new WeatherRequestData($this->validated());
+    public function toData(): CreateWeatherRequestData
+    {
+        return new CreateWeatherRequestData($this->validated());
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Domain\Weather\Models;
 
 use App\Domain\Common\UuidModel;
+use App\Integrations\DataTransferObjects\WeatherRequestData;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,5 +19,10 @@ class WeatherRequest extends UuidModel
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function toWeatherRequestData(): WeatherRequestData
+    {
+        return new WeatherRequestData(location: $this->location);
     }
 }

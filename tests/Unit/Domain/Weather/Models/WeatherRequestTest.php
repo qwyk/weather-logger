@@ -21,4 +21,14 @@ class WeatherRequestTest extends \Tests\TestCase
         $this->assertInstanceOf(WeatherRequest::class, $weatherRequest);
     }
 
+    /** @test */
+    public function itReturnsTheWeatherRequestData(): void
+    {
+        /** @var WeatherRequest $weatherRequest */
+        $weatherRequest = WeatherRequest::factory()->for(User::factory())->create();
+        $data = $weatherRequest->toWeatherRequestData();
+        $this->assertEquals($weatherRequest->location, $data->location);
+    }
+
+
 }

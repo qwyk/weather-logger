@@ -2,14 +2,14 @@
 
 namespace App\Domain\Weather\Actions;
 
+use App\Domain\Weather\DataTransferObjects\CreateWeatherRequestData;
 use App\Domain\Weather\Jobs\ProcessWeatherRequest;
 use App\Domain\Weather\Models\WeatherRequest;
-use App\Integrations\DataTransferObjects\WeatherRequestData;
 use App\Models\User;
 
 class CreateWeatherRequestAction
 {
-    public function execute(WeatherRequestData $data, User $user): WeatherRequest
+    public function execute(CreateWeatherRequestData $data, User $user): WeatherRequest
     {
         $weatherRequest = WeatherRequest::create([
             'location' => $data->location,

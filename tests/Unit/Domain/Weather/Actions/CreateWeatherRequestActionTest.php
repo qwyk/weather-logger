@@ -3,6 +3,7 @@
 namespace Tests\Unit\Domain\Weather\Actions;
 
 use App\Domain\Weather\Actions\CreateWeatherRequestAction;
+use App\Domain\Weather\DataTransferObjects\CreateWeatherRequestData;
 use App\Domain\Weather\Jobs\ProcessWeatherRequest;
 use App\Domain\Weather\Models\WeatherRequest;
 use App\Integrations\DataTransferObjects\WeatherRequestData;
@@ -25,7 +26,7 @@ class CreateWeatherRequestActionTest extends TestCase
         /** @var CreateWeatherRequestAction $action */
         $action = app(CreateWeatherRequestAction::class);
 
-        $data = new WeatherRequestData(['location' => $this->faker->city]);
+        $data = new CreateWeatherRequestData(['location' => $this->faker->city]);
 
         $action->execute($data, $this->user);
 
