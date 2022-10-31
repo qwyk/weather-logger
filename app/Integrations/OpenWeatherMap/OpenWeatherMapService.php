@@ -14,7 +14,7 @@ class OpenWeatherMapService implements WeatherService
     {
         $query = http_build_query([
             'APPID' => app()->config->get('open-weather-map.app_id'),
-            'q' => $request->cityName
+            'q' => $request->location
         ]);
 
         $response = Http::baseUrl(app()->config->get('open-weather-map.domain'))

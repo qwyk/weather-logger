@@ -6,5 +6,5 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class WeatherRequestData extends DataTransferObject
 {
-    public string $cityName;
+    public string $location;
 }

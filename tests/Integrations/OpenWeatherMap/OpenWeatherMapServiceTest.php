@@ -25,7 +25,7 @@ class OpenWeatherMapServiceTest extends TestCase
         app()->config->set('open-weather-map.app_id', $owmAppId);
 
         $cityName = $this->faker->city;
-        $request  = new WeatherRequestData(['cityName' => $cityName]);
+        $request  = new WeatherRequestData(['location' => $cityName]);
 
         $expectedQuery = http_build_query([
             'APPID' => $owmAppId,

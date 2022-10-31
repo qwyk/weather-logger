@@ -1,5 +1,5 @@
 # Magaya DFP
-Code Challenge - PHP Backend Developer
+**Code Challenge - PHP Backend Developer**
 
 This code challenge is part of the interview process for PHP Backend Developer at Magaya’s DFP (Digital Freight Portals) team.
 
@@ -7,17 +7,18 @@ This code challenge is part of the interview process for PHP Backend Developer a
 Create a personal weather logger
 
 Deliver an application that meets the following functional requirements:
-1. Can receive a post request to fetch weather data for a given city (a WeatherRequest)
-   and returns an ID for the request
-2. Asynchronously executes the request to the weather API at “https://weatherdbi.herokuapp.com/data/weather/{CITYNAME}” or "https://api.openweathermap.org/data/2.5/weather?q={CITYNAME}&APPID={TOKEN}" and stores the returned region name and current conditions in a database (next_days is not required)
-   THIS WEBSITE SHOULD NOT REQUIRE ANY AUTHENTICATION, IF YOU HAVE PROBLEMS WITH IT PLEASE CONTACT US OR TRY TO FIND SOMETHING EQUIVALENT.
-3. Allows a user to find all the requests they have made and returns the data in JSON, this should be able to paginate.
-4. Allows the user to find a request they have made by ID and returns the data
-5. Allows the user to archive a request by deleting but must not delete permanently from the database.
-6. Does not allow a user to view the requests that another has made.
-7. Allows the user to attach a comment or note to one of their previous requests.
-8. Allows the user to see all the comments made on a specific request
-9. Allows the user to delete a comment.
+
+- [X] Can receive a post request to fetch weather data for a given city (a WeatherRequest)
+   and returns an ID for the request 
+- [ ] Asynchronously executes the request to the weather API at “https://weatherdbi.herokuapp.com/data/weather/{CITYNAME}” or "https://api.openweathermap.org/data/2.5/weather?q={CITYNAME}&APPID={TOKEN}" and stores the returned region name and current conditions in a database (next_days is not required)
+   THIS WEBSITE SHOULD NOT REQUIRE ANY AUTHENTICATION, IF YOU HAVE PROBLEMS WITH IT PLEASE CONTACT US OR TRY TO FIND SOMETHING EQUIVALENT. 
+- [X] Allows a user to find all the requests they have made and returns the data in JSON, this should be able to paginate.
+- [X] Allows the user to find a request they have made by ID and returns the data
+- [X] Allows the user to archive a request by deleting but must not delete permanently from the database. 
+- [X] Does not allow a user to view the requests that another has made. 
+- [ ] Allows the user to attach a comment or note to one of their previous requests. 
+- [ ] Allows the user to see all the comments made on a specific request
+- [ ] Allows the user to delete a comment.
 
 ## Notes
 - Authentication is not important, so we recommend keeping this simple.
@@ -38,4 +39,4 @@ Flexible, you can use GitHub/Gitlab or equivalent or send a Zip. Please do make 
   The deliverable will be evaluated by running and reviewing the attached test. Therefore make sure that for any relevant entry point or functionality some test exist otherwise we might miss some logic. 
   
 ## Questions
-  Please email: mverhaegen@magaya.com
+  Please email: hidden
