@@ -13,6 +13,8 @@ class WeatherRequest extends UuidModel
     use HasFactory;
     use SoftDeletes;
 
+    protected $guarded = false;
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
