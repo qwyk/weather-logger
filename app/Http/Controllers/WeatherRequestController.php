@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Comment\Contracts\CommentRepositoryContract;
 use App\Domain\Weather\Actions\CreateWeatherRequestAction;
 use App\Domain\Weather\Models\WeatherRequest;
 use App\Http\Requests\CreateWeatherRequestRequest;
+use App\Http\Resources\CommentResource;
 use App\Http\Resources\WeatherRequestResource;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -14,6 +16,10 @@ use Illuminate\Http\Response;
 class WeatherRequestController
 {
     use AuthorizesRequests;
+
+    public function __construct(private CommentRepositoryContract $comments)
+    {
+    }
 
     public function index(Request $request): AnonymousResourceCollection
     {
@@ -46,5 +52,11 @@ class WeatherRequestController
         $weatherRequest->delete();
 
         return response()->noContent();
+    }
+
+    public function comments(WeatherRequest $weatherRequest): AnonymousResourceCollection {
+        $this->authorize('show', $weatherRequest);
+
+        return CommentResource::collection($this->comments->index($weatherRequest));
     }
 }

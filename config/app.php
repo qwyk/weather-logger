@@ -195,7 +195,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        App\Domain\Weather\WeatherServiceProvider::class
+        App\Domain\Weather\WeatherServiceProvider::class,
+        App\Domain\Comment\CommentServiceProvider::class
     ],
 
     /*

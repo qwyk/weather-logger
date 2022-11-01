@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Domain\Comment\Models\Comment;
 use App\Domain\Weather\Actions\CreateWeatherRequestAction;
 use App\Domain\Weather\Models\WeatherRequest;
 use App\Models\User;
@@ -57,7 +58,7 @@ class WeatherRequestsTest extends TestCase
                  ],
 
              ])
-            ->assertJsonPath('data.id', $weatherRequest->id);
+             ->assertJsonPath('data.id', $weatherRequest->id);
     }
 
     /** @test */
@@ -106,6 +107,32 @@ class WeatherRequestsTest extends TestCase
 
         $this->assertSoftDeleted($weatherRequest);
     }
+
+    /** @test */
+    public function itGetsCommentsForTheWeatherRequest(): void
+    {
+        $weatherRequest = WeatherRequest::factory()->for($this->user)->create();
+
+        $count = 10;
+        Comment::factory()->for($weatherRequest, 'commentable')->count($count)->create();
+
+        $this->actingAs($this->user)
+             ->getJson(sprintf('/api/weather-requests/%s/comments', $weatherRequest->id))
+             ->assertOk()
+             ->assertJsonStructure([
+                 'data' => [
+                     '*' => [
+                         'id',
+                         'content',
+                         'created_at'
+                     ]
+                 ],
+                 'meta',
+                 'links'
+             ])
+             ->assertJsonPath('meta.total', $count);
+    }
+
 
     protected function setUp(): void
     {

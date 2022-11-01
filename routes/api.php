@@ -20,7 +20,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::group(['prefix' => 'weather-requests'], function() {
         Route::get('/', [\App\Http\Controllers\WeatherRequestController::class, 'index']);
         Route::get('/{weatherRequest}', [\App\Http\Controllers\WeatherRequestController::class, 'show']);
-        Route::post('/', [\App\Http\Controllers\WeatherRequestController::class, 'create']);
+
         Route::delete('/{weatherRequest}', [\App\Http\Controllers\WeatherRequestController::class, 'delete']);
+        Route::group(['prefix' => '/{weatherRequest}/comments'], function() {
+            Route::get('/', [\App\Http\Controllers\WeatherRequestController::class, 'comments']);
+        });
     });
 });
