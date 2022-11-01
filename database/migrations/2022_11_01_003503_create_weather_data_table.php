@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -13,13 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('weather_requests', static function (Blueprint $table) {
+        Schema::create('weather_data', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(\App\Models\User::class)->constrained();
             $table->string('location', 255);
-            $table->foreignUuid('weather_data_id')->nullable()->constrained('weather_data')->cascadeOnDelete();
+            $table->string('description', 255)->nullable();
+            $table->timestamp('timestamp');
+            $table->unsignedInteger('temperature');
+            $table->unsignedInteger('humidity');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('weather_requests');
+        Schema::dropIfExists('weather_data');
     }
 };

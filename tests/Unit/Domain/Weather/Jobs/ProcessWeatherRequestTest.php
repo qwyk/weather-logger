@@ -12,12 +12,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Carbon;
 use Mockery\MockInterface;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
-class ProcessWeatherRequestTest extends \Tests\TestCase
+class ProcessWeatherRequestTest extends TestCase
 {
-
-
     use RefreshDatabase;
     use WithFaker;
 
@@ -32,7 +30,7 @@ class ProcessWeatherRequestTest extends \Tests\TestCase
     public function itGetsTheWeatherRequest(): void
     {
         $weatherRequest = WeatherRequest::factory()->for(User::factory())->create();
-        $mockResponse = new WeatherResponseData(
+        $mockResponse   = new WeatherResponseData(
             location: $this->faker->city,
             description: $this->faker->text(20),
             timestamp: Carbon::now(),
@@ -40,11 +38,15 @@ class ProcessWeatherRequestTest extends \Tests\TestCase
             humidity: $this->faker->numberBetween(20, 100)
         );
 
-        $this->mock(WeatherService::class, function(MockInterface $mock) use ($mockResponse) {
+        $this->mock(WeatherService::class, function (MockInterface $mock) use ($mockResponse) {
             $mock->expects('getWeather')->once()->andReturn($mockResponse);
         });
 
         (new ProcessWeatherRequest($weatherRequest))->handle(app(WeatherService::class));
+
+        $weatherRequest->refresh();
+
+        $this->assertNotNull($weatherRequest->weatherData);
     }
 
 }

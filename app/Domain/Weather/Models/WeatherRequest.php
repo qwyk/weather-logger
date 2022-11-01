@@ -21,6 +21,11 @@ class WeatherRequest extends UuidModel
         return $this->belongsTo(User::class);
     }
 
+    public function weatherData(): BelongsTo
+    {
+        return $this->belongsTo(WeatherData::class);
+    }
+
     public function toWeatherRequestData(): WeatherRequestData
     {
         return new WeatherRequestData(location: $this->location);

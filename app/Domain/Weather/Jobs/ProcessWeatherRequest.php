@@ -2,6 +2,7 @@
 
 namespace App\Domain\Weather\Jobs;
 
+use App\Domain\Weather\Models\WeatherData;
 use App\Domain\Weather\Models\WeatherRequest;
 use App\Integrations\Contracts\WeatherService;
 use Illuminate\Bus\Queueable;
@@ -26,11 +27,15 @@ class ProcessWeatherRequest implements ShouldQueue
     /**
      * Execute the job.
      *
+     * @param  \App\Integrations\Contracts\WeatherService  $service
+     *
      * @return void
      */
     public function handle(WeatherService $service): void
     {
-        $service->getWeather($this->weatherRequest->toWeatherRequestData());
-        // TODO: handle response
+        $response = $service->getWeather($this->weatherRequest->toWeatherRequestData());
+
+        $weatherData = WeatherData::fromWeatherResponseData($response);
+        $weatherData->weatherRequests()->save($this->weatherRequest);
     }
 }
