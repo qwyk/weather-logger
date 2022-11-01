@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{weatherRequest}', [WeatherRequestController::class, 'delete']);
         Route::group(['prefix' => '/{weatherRequest}/comments'], static function () {
             Route::get('/', [WeatherRequestController::class, 'comments']);
+            Route::post('/', [WeatherRequestController::class, 'createComment']);
         });
     });
 

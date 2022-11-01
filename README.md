@@ -16,7 +16,7 @@ Deliver an application that meets the following functional requirements:
 - [X] Allows the user to find a request they have made by ID and returns the data
 - [X] Allows the user to archive a request by deleting but must not delete permanently from the database. 
 - [X] Does not allow a user to view the requests that another has made. 
-- [ ] Allows the user to attach a comment or note to one of their previous requests. 
+- [X] Allows the user to attach a comment or note to one of their previous requests. 
 - [X] Allows the user to see all the comments made on a specific request
 - [X] Allows the user to delete a comment.
 

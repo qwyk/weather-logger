@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Domain\Comment\Contracts\CommentRepositoryContract;
 use App\Domain\Weather\Actions\CreateWeatherRequestAction;
 use App\Domain\Weather\Models\WeatherRequest;
+use App\Http\Requests\CreateCommentRequest;
 use App\Http\Requests\CreateWeatherRequestRequest;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\WeatherRequestResource;
@@ -58,5 +59,12 @@ class WeatherRequestController
         $this->authorize('show', $weatherRequest);
 
         return CommentResource::collection($this->comments->index($weatherRequest));
+    }
+
+    public function createComment(CreateCommentRequest $request, WeatherRequest $weatherRequest): CommentResource
+    {
+        $this->authorize('show', $weatherRequest);
+
+        return new CommentResource($this->comments->create($weatherRequest, $request->toData()));
     }
 }

@@ -10,6 +10,8 @@ class Comment extends UuidModel
 {
     use HasFactory;
 
+    protected $guarded = false;
+
     public function commentable(): MorphTo
     {
         return $this->morphTo();

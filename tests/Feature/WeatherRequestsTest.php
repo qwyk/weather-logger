@@ -133,6 +133,27 @@ class WeatherRequestsTest extends TestCase
              ->assertJsonPath('meta.total', $count);
     }
 
+    /** @test */
+    public function itCreatesACommentOnTheWeatherRequest(): void
+    {
+        $weatherRequest = WeatherRequest::factory()->for($this->user)->create();
+        $payload        = [
+            'content' => $this->faker->text()
+        ];
+
+        $this->actingAs($this->user)
+             ->postJson(sprintf('/api/weather-requests/%s/comments', $weatherRequest->id), $payload)
+             ->assertCreated()
+             ->assertJsonStructure([
+                 'data' => [
+                     'id',
+                     'content',
+                     'created_at'
+                 ]
+             ])
+            ->assertJsonPath('data.content', $payload['content']);
+    }
+
 
     protected function setUp(): void
     {
