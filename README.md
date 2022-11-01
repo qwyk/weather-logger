@@ -1,6 +1,8 @@
 # Magaya DFP
 **Code Challenge - PHP Backend Developer**
 
+[![PHPUnit](https://github.com/qwyk/weather-logger/actions/workflows/laravel.yml/badge.svg)](https://github.com/qwyk/weather-logger/actions/workflows/laravel.yml)
+
 This code challenge is part of the interview process for PHP Backend Developer at Magaya’s DFP (Digital Freight Portals) team.
 
 ## Task
