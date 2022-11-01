@@ -2,14 +2,14 @@
 
 namespace Tests\Unit\Domain\Weather\Models;
 
+use App\Domain\Comment\Models\Comment;
 use App\Domain\Weather\Models\WeatherRequest;
-use App\Integrations\OpenWeatherMap\DataTransferObjects\Weather;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
-class WeatherRequestTest extends \Tests\TestCase
+class WeatherRequestTest extends TestCase
 {
     use RefreshDatabase;
     use WithFaker;
@@ -26,8 +26,18 @@ class WeatherRequestTest extends \Tests\TestCase
     {
         /** @var WeatherRequest $weatherRequest */
         $weatherRequest = WeatherRequest::factory()->for(User::factory())->create();
-        $data = $weatherRequest->toWeatherRequestData();
+        $data           = $weatherRequest->toWeatherRequestData();
         $this->assertEquals($weatherRequest->location, $data->location);
+    }
+
+    /** @test */
+    public function itCanHaveComments(): void
+    {
+        $weatherRequest = WeatherRequest::factory()->for(User::factory())->create();
+
+        Comment::factory()->for($weatherRequest, 'commentable')->count(5)->create();
+
+        $this->assertCount(5, $weatherRequest->comments);
     }
 
 

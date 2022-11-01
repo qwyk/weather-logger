@@ -10,7 +10,7 @@ Deliver an application that meets the following functional requirements:
 
 - [X] Can receive a post request to fetch weather data for a given city (a WeatherRequest)
    and returns an ID for the request 
-- [ ] Asynchronously executes the request to the weather API at “https://weatherdbi.herokuapp.com/data/weather/{CITYNAME}” or "https://api.openweathermap.org/data/2.5/weather?q={CITYNAME}&APPID={TOKEN}" and stores the returned region name and current conditions in a database (next_days is not required)
+- [X] Asynchronously executes the request to the weather API at “https://weatherdbi.herokuapp.com/data/weather/{CITYNAME}” or "https://api.openweathermap.org/data/2.5/weather?q={CITYNAME}&APPID={TOKEN}" and stores the returned region name and current conditions in a database (next_days is not required)
    THIS WEBSITE SHOULD NOT REQUIRE ANY AUTHENTICATION, IF YOU HAVE PROBLEMS WITH IT PLEASE CONTACT US OR TRY TO FIND SOMETHING EQUIVALENT. 
 - [X] Allows a user to find all the requests they have made and returns the data in JSON, this should be able to paginate.
 - [X] Allows the user to find a request they have made by ID and returns the data
